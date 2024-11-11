@@ -1,0 +1,21 @@
+{
+  "name": "warcraft-labeler",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "bot": "bun src/bot.ts",
+    "labeler": "bun src/labeler.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@atcute/client": "^2.0.4",
+    "@skyware/bot": "^0.3.7",
+    "@skyware/labeler": "^0.1.13",
+    "dedent": "^1.5.3"
+  }
+}
