@@ -1,6 +1,5 @@
 import { LabelerServer } from "@skyware/labeler";
 import type { ComAtprotoLabelDefs } from "@atcute/client/lexicons";
-import type { Label } from "./types";
 import { LABEL_LIMIT } from "./constants";
 
 const LABELER_PORT = 8002;
@@ -63,29 +62,6 @@ export async function addLabelToUser(did: string, indentifier: string) {
   } catch (err) {
     console.error(err);
   }
-}
-
-function addOrUpdateLabel(did: string, rkey: string, labels: Set<string>) {
-  // const newLabel = server.
-  // if (!newLabel) {
-  //   console.warn(`New label not found: ${rkey}. Likely liked a post that's not one for labels.`);
-  //   return;
-  // }
-  // console.info(`New label: ${newLabel.identifier}`);
-  // if (labels.size >= LABEL_LIMIT) {
-  //   try {
-  //     server.createLabels({ uri: did }, { negate: Array.from(labels) });
-  //     console.info(`Successfully negated existing labels: ${Array.from(labels).join(', ')}`);
-  //   } catch (error) {
-  //     console.error(`Error negating existing labels: ${error}`);
-  //   }
-  // }
-  // try {
-  //   server.createLabel({ uri: did, val: newLabel.identifier });
-  //   console.info(`Successfully labeled ${did} with ${newLabel.identifier}`);
-  // } catch (error) {
-  //   console.error(`Error adding new label: ${error}`);
-  // }
 }
 
 server.start(LABELER_PORT, (error) => {

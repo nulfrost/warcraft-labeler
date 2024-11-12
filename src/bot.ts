@@ -1,6 +1,5 @@
 import { Bot, Post } from "@skyware/bot";
 import { addLabelToUser, deleteAllLabels, fetchCurrentLabels } from "./labeler";
-import { getLabelerLabelDefinitions } from "@skyware/labeler/scripts";
 import dedent from "dedent";
 
 const bot = new Bot();
@@ -55,19 +54,6 @@ const hordePost = await post.reply({
     "Lok'Tar Ogar!"
   `,
 });
-
-const deletePost = await bot.post({
-  text: "Like this post to remove all labels",
-});
-const deletePostRkey = deletePost.uri.split("/").pop()!;
-
-console.log(`Delete post rKey: ${deletePostRkey}`);
-
-console.log(`
-"Alliance post: "${alliancePost.uri}
-
-"Horde post: "${hordePost.uri}
-`);
 
 const postsToIndentifier: Record<string, string> = {
   [alliancePost.uri]: "for-the-alliance",
