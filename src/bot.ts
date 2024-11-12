@@ -1,5 +1,6 @@
 import { Bot, Post } from "@skyware/bot";
 import { addLabelToUser, deleteAllLabels, fetchCurrentLabels } from "./labeler";
+import { getLabelerLabelDefinitions } from "@skyware/labeler/scripts";
 import dedent from "dedent";
 
 const bot = new Bot();
@@ -55,6 +56,12 @@ const hordePost = await post.reply({
   `,
 });
 
+const deletePost = await bot.post({
+  text: "Like this post to remove all labels",
+});
+
+const deletePostRkey = deletePost.uri.split("/").pop()!;
+
 const postsToIndentifier: Record<string, string> = {
   [alliancePost.uri]: "for-the-alliance",
   [hordePost.uri]: "lok-tar-ogar",
@@ -62,10 +69,8 @@ const postsToIndentifier: Record<string, string> = {
 
 bot.on("like", async (event) => {
   try {
-    if (
-      event.subject instanceof Post &&
-      event.subject.text.includes("remove all labels")
-    ) {
+    const isDeletePost = deletePostRkey === event.subject.uri.split("/").pop()!;
+    if (isDeletePost) {
       const labels = fetchCurrentLabels(event.user.did);
       deleteAllLabels(event.user.did, labels);
       return;
